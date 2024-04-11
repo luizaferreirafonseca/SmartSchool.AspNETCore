@@ -8,7 +8,7 @@ using SmartSchool.Data;
 namespace SmartSchool.Migrations
 {
     [DbContext(typeof(SmartContext))]
-    [Migration("20240411010516_init")]
+    [Migration("20240411011229_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
