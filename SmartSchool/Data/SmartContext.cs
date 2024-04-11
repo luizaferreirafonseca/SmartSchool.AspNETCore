@@ -10,7 +10,7 @@ namespace SmartSchool.Data
         public SmartContext(DbContextOptions<SmartContext> options) : base(options) { }
         public DbSet<Aluno> Alunos { get; set; }
 
-        public DbSet<Professor> Professor { get; set;}
+        public DbSet<Professor> Professores { get; set;}
 
         public DbSet<Disciplina> Disciplina { get; set;}
 
