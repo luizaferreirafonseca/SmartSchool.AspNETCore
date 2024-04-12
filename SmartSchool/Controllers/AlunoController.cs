@@ -12,17 +12,16 @@ namespace SmartSchool.Controllers
     {
 
         private readonly SmartContext _context;
+        private readonly IRepository _repo;
 
-        public AlunoController (SmartContext context)
+        public AlunoController (SmartContext context, IRepository repo
+            )
         {
             _context = context;
+            _repo = repo;
         }
 
-        [HttpGet]
-        public ActionResult Get()
-        {
-            return Ok(_context.Alunos);
-        }
+        
 
 
         [HttpGet("byId/{id}")]
@@ -55,9 +54,15 @@ namespace SmartSchool.Controllers
 
         public ActionResult Post(Aluno aluno)
         {
-            _context.Add(aluno);
-            _context.SaveChanges();
-            return Ok(aluno);
+            _repo.Add(aluno);
+
+            if (_repo.SaveChanges())
+            {
+                return Ok(aluno);
+
+            }
+
+            return BadRequest("ALuno não foi cadastrado");
         }
 
 
@@ -67,9 +72,15 @@ namespace SmartSchool.Controllers
         {
             var alu = _context.Alunos.AsNoTracking().FirstOrDefault(a => a.Id == id);
             if (alu == null) return BadRequest("Aluno não encontrado");
-            _context.Update(aluno);
-            _context.SaveChanges();
-            return Ok(aluno);
+            _repo.Update(aluno);
+
+            if (_repo.SaveChanges())
+            {
+                return Ok(aluno);
+
+            }
+
+            return BadRequest("ALuno não foi atualizado");
         }
 
         [HttpPatch("{id}")]
@@ -78,9 +89,16 @@ namespace SmartSchool.Controllers
         {
             var alu = _context.Alunos.AsNoTracking().FirstOrDefault(a => a.Id == id);
             if (alu == null) return BadRequest("Aluno não encontrado");
-            _context.Update(aluno);
-            _context.SaveChanges();
-            return Ok();
+
+            _repo.Update(aluno);
+
+            if (_repo.SaveChanges())
+            {
+                return Ok(aluno);
+
+            }
+
+            return BadRequest("ALuno não foi atualizado");
         }
 
 
@@ -91,9 +109,15 @@ namespace SmartSchool.Controllers
         {
             var alu = _context.Alunos.FirstOrDefault(a => a.Id == id);
             if (alu == null) return BadRequest("Aluno não encontrado");
-            _context.Remove(aluno);
-            _context.SaveChanges();
-            return Ok(aluno);
+            _repo.Delete(aluno);
+
+            if (_repo.SaveChanges())
+            {
+                return Ok(aluno);
+
+            }
+
+            return BadRequest("ALuno não foi deletado");
         }
 
 
