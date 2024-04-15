@@ -13,16 +13,17 @@ namespace SmartSchool.Data
 
         bool SaveChanges();
 
-        Aluno[] GetAllAlunos();
+        Aluno[] GetAllAlunos(bool includeProfessor = false);
 
-        Aluno[] GetAllAlunosByDisciplinaId();
+        Aluno[] GetAllAlunosByDisciplinaId(int disciplinaId, bool includeProfessor = false);
 
-        Aluno[] GetAlunosByID();
+        Aluno GetAlunoByID(int alunoId, bool includeProfessor = false);
 
-        Aluno[] GetAllProfessores();
+        //Professor
+       Professor[] GetAllProfessores(bool includeAlunos = false);
 
-        Aluno[] GetAllProfessoresByDisciplinaId();
+        Professor[] GetAllProfessoresByDisciplinaId(int disciplinaId, bool includeAlunos = false);
 
-        Aluno[] GetAllProfessoresByID();
+        Professor GetProfessorByID(int professorId, bool includeProfessor = false);
     }
 }
