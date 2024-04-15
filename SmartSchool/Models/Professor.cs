@@ -20,11 +20,12 @@
 
         public Professor () { }
 
-        public Professor(int id, string nome, int registro, string sobrenome)
+        public Professor(int id,  int registro, string nome, string sobrenome)
         {
             Id = id;
+            Registro = registro;
             Nome = nome;
-            Registro = Registro;
+            
             Sobrenome = sobrenome;
         }
     }
